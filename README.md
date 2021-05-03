@@ -1,1 +1,1 @@
-# CinemaReservationsProject
+# CinemaReservationProject
