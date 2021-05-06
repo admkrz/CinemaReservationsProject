@@ -11,8 +11,11 @@ import java.util.Optional;
 
 @RestController
 public class ReservationController {
-    @Autowired
-    private ReservationRepository reservationRepository;
+    private final ReservationRepository reservationRepository;
+
+    public ReservationController(ReservationRepository reservationRepository) {
+        this.reservationRepository = reservationRepository;
+    }
 
     @RequestMapping(value = "/reservations", method = RequestMethod.GET)
     public ResponseEntity<Object> getReservations() {

@@ -11,8 +11,11 @@ import java.util.Optional;
 
 @RestController
 public class MovieController {
-    @Autowired
-    private MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
+
+    public MovieController(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
 
     @RequestMapping(value = "/movies", method = RequestMethod.GET)
     public ResponseEntity<Object> getMovies() {

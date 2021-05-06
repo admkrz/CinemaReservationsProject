@@ -11,8 +11,11 @@ import java.util.Optional;
 
 @RestController
 public class ScreeningController {
-    @Autowired
-    private ScreeningRepository screeningRepository;
+    private final ScreeningRepository screeningRepository;
+
+    public ScreeningController(ScreeningRepository screeningRepository) {
+        this.screeningRepository = screeningRepository;
+    }
 
     @RequestMapping(value = "/screenings", method = RequestMethod.GET)
     public ResponseEntity<Object> getScreenings() {

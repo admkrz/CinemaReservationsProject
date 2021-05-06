@@ -11,8 +11,11 @@ import java.util.Optional;
 
 @RestController
 public class HallController {
-    @Autowired
-    private HallRepository hallRepository;
+    private final HallRepository hallRepository;
+
+    public HallController(HallRepository hallRepository) {
+        this.hallRepository = hallRepository;
+    }
 
     @RequestMapping(value = "/halls", method = RequestMethod.GET)
     public ResponseEntity<Object> getHalls() {
