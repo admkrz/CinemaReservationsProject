@@ -1,5 +1,7 @@
 package com.project.cinemareservation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +19,14 @@ public class Seat {
 
     @ManyToOne
     @JoinColumn(name = "hall_id", nullable = false)
+    @JsonIgnoreProperties("seats")
     private Hall hall;
 
     @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("seat")
     private List<ReservedSeat> reservedSeats = new ArrayList<>();
+
+    public Seat(){}
 
     public Seat(Integer rowIndex, Integer seatIndex, Integer price, SeatStatus status) {
         this.rowIndex = rowIndex;

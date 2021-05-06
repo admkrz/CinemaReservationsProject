@@ -1,7 +1,12 @@
 package com.project.cinemareservation.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "screenings")
@@ -12,12 +17,21 @@ public class Screening {
     private Time time;
 
     @ManyToOne
-    @JoinColumn(name="movie_id", nullable = false)
+    @JoinColumn(name = "movie_id", nullable = false)
+    @JsonIgnoreProperties("screenings")
     private Movie movie;
 
     @ManyToOne
-    @JoinColumn(name="hall_id", nullable = false)
+    @JoinColumn(name = "hall_id", nullable = false)
+    @JsonIgnoreProperties("screenings")
     private Hall hall;
+
+    @OneToMany
+    @JsonIgnoreProperties("reservation")
+    private List<Reservation> reservations = new ArrayList<>();
+
+    public Screening() {
+    }
 
     public Screening(Time time, Movie movie, Hall hall) {
         this.time = time;
@@ -57,6 +71,14 @@ public class Screening {
         this.hall = hall;
     }
 
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
     @Override
     public String toString() {
         return "Screening{" +
@@ -64,6 +86,7 @@ public class Screening {
                 ", time=" + time +
                 ", movie=" + movie +
                 ", hall=" + hall +
+                ", reservations=" + reservations +
                 '}';
     }
 }

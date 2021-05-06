@@ -1,5 +1,8 @@
 package com.project.cinemareservation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +18,15 @@ public class Hall {
     private Integer columnCount;
 
     @OneToMany(mappedBy="hall", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("hall")
     private List<Screening> screenings = new ArrayList<>();
 
     @OneToMany(mappedBy="hall", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("hall")
     private List<Seat> seats = new ArrayList<>();
+
+    public Hall() {
+    }
 
     public Hall(String name, Integer rowCount, Integer columnCount) {
         this.name = name;

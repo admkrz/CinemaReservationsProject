@@ -1,5 +1,7 @@
 package com.project.cinemareservation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,10 +13,12 @@ public class ReservedSeat {
 
     @ManyToOne
     @JoinColumn(name="reservation_id", nullable = false)
+    @JsonIgnoreProperties("reservedSeats")
     private Reservation reservation;
 
     @ManyToOne
     @JoinColumn(name="seats_id", nullable = false)
+    @JsonIgnoreProperties("reservedSeats")
     private Seat seat;
 
     public ReservedSeat(Reservation reservation, Seat seat) {

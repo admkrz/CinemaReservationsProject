@@ -1,5 +1,8 @@
 package com.project.cinemareservation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ public class Movie {
     private Time duration;
 
     @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("movie")
     private List<Screening> screenings = new ArrayList<>();
 
     public Movie() {

@@ -1,5 +1,7 @@
 package com.project.cinemareservation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +19,14 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "screening_id", nullable = false)
+    @JsonIgnoreProperties("reservations")
     private Screening screening;
 
     @OneToMany(mappedBy="reservation", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("reservation")
     private List<ReservedSeat> reservedSeats = new ArrayList<>();
+
+    public Reservation(){}
 
     public Reservation(String name, String surname, String email, ReservationStatus status, Screening screening) {
         this.name = name;
